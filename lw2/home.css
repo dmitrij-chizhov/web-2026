@@ -1,0 +1,52 @@
+.image {
+    width: 474px;
+    height: 474px;
+}
+
+.image_service{
+    width: 40px;
+    height: 40px;
+}
+
+.image_service_edit{
+    width: 24px;
+    height: 24px;
+}
+
+.image_avatar{
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+}
+
+.image_reaction{
+    width: 68px;
+    height: 30px;
+}
+
+.text {
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 15px/18px Golos UI, sans-serif;
+}
+
+.text_avatar {
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 500 14px/18px Golos UI, sans-serif;
+}
+
+.text_continuation {
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 15px/18px Golos UI, sans-serif;
+    color: #808080;
+
+}
+
+.text_time {
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 14px/18px Golos UI, sans-serif;
+    color: #22222280;
+}

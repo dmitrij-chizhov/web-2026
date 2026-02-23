@@ -1,0 +1,43 @@
+.image {
+    width: 322.35px;
+    height: 322.35px;
+}
+
+.image_service {
+    width: 40px;
+    height: 40px;
+}
+
+.image_avatar {
+    width: 123px;
+    height: 123px;
+    border-radius: 16px;
+}
+
+.image_posts {
+    width: 16x;
+    height: 16px;
+}
+
+.text {
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 15px/18px Golos UI, sans-serif;
+}
+
+.text_avatar {
+    letter-spacing: -0.25px;
+    font-style: Medium;
+    font: 500 32px/32px Golos UI, sans-serif;
+}
+
+.text_posts {
+    width: 101px;
+    height: 30px;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #F2F3F5;
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 15px/18px Golos UI, sans-serif;
+}
