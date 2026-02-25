@@ -3,56 +3,69 @@
     height: 100%;
 }
 
-.menu {
+.page__menu {
     width: 10%;
     height: 100%;
 }
 
-.main_content {
-    width: 90%;
-    height: 100%;
-}
-
-.posts {
-    height: 100%;
-    width: 474px;
-}
-
-.info_post {
-    height: 32px;
-    width: 474px;
-}
-
-.image {
-    width: 474px;
-    height: 474px;
-}
-
-.image_service{
+.menu__image-service{
     width: 40px;
     height: 40px;
     display: block;
 }
 
-.image_service_edit{
-    width: 24px;
-    height: 24px;
-    display: inline;
+.page__main-content {
+    width: 90%;
+    height: 100%;
 }
 
-.image_avatar{
+.main-content__post {
+    width: 474px;
+    height: 100%;
+}
+
+.post__info {
+    height: 32px;
+    width: 474px;
+}
+
+.info__image-avatar{
     width: 32px;
     height: 32px;
     border-radius: 6px;
     display: inline;
 }
 
-.image_reaction{
+.info__image-edit{
+    width: 24px;
+    height: 24px;
+    display: inline;
+}
+
+.info__text-avatar {
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 500 14px/18px Golos UI, sans-serif;
+    display: inline;
+    
+}
+
+.post__content {
+    height: 100%;
+    width: 474px;
+}
+
+.content__image {
+    width: 474px;
+    height: 474px;
+}
+
+.content__image-reaction{
     width: 16px;
     height: 16px;
 }
 
-.reaction {
+.content__reaction {
     width: 68px;
     height: 30px;
     border-radius: 8px;
@@ -60,27 +73,33 @@
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 15px/18px Golos UI, sans-serif;
+    text-align: center;
 }
 
-.text {
+.content__reaction-active {
+    width: 68px;
+    height: 30px;
+    border-radius: 8px;
+    font-style: Regular;
+    letter-spacing: -0.15px;
+    font: 15px/18px Golos UI, sans-serif;
+    text-align: center;
+    color: #740000;
+    border: 1px solid #FF000030;
+    background: #ef53531d;
+}
+
+.content__text {
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 15px/18px Golos UI, sans-serif;
 }
 
-.text_avatar {
-    font-style: Regular;
-    letter-spacing: -0.15px;
-    font: 500 14px/18px Golos UI, sans-serif;
-    display: inline;
-}
-
-.number_of_photo {
+.content__number-of-photo {
     width: 44px;
     height: 24px;
     border-radius: 20px;
     background: #22222280;
-    font-family: Golos UI;
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 15px/18px Golos UI, sans-serif;
@@ -88,7 +107,7 @@
     color: #FFFFFF;
 }
 
-.text_continuation {
+.content__text-continuation {
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 15px/18px Golos UI, sans-serif;
@@ -96,7 +115,7 @@
 
 }
 
-.text_time {
+.content__text-time {
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 14px/18px Golos UI, sans-serif;

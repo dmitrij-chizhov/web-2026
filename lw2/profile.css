@@ -1,37 +1,53 @@
-.image {
-    width: 322.35px;
-    height: 322.35px;
+.page {
+    width: 100%;
+    height: 100%;
 }
 
-.image_service {
+.page__menu {
+    width: 10%;
+    height: 100%;
+}
+
+.menu__image-service {
     width: 40px;
     height: 40px;
+    display: block;
 }
 
-.image_avatar {
+.page__main-content {
+    width: 90%;
+    height: 100%;
+}
+
+.main-content__user {
+    height: 100%;
+}
+
+.user__info {
+    height: 329px;
+}
+
+.info__image-avatar {
     width: 123px;
     height: 123px;
     border-radius: 16px;
 }
 
-.image_posts {
+.info__image-posts {
     width: 16x;
     height: 16px;
 }
 
-.text {
+.info__text {
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 15px/18px Golos UI, sans-serif;
+    width: 361px;
+    height: 36px;
+    text-align: center;
 }
 
-.text_avatar {
-    letter-spacing: -0.25px;
-    font-style: Medium;
-    font: 500 32px/32px Golos UI, sans-serif;
-}
-
-.text_posts {
+.info__number-of-posts {
     width: 101px;
     height: 30px;
     text-align: center;
@@ -40,4 +56,20 @@
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 15px/18px Golos UI, sans-serif;
+}
+
+.info__text-avatar {
+    letter-spacing: -0.25px;
+    font-style: Medium;
+    font: 500 32px/32px Golos UI, sans-serif;
+}
+
+.user__content {
+    width: 980px;
+    height: 100%;
+}
+
+.content__image {
+    width: 322.35px;
+    height: 322.35px;
 }

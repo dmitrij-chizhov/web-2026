@@ -1,39 +1,58 @@
-.title {
+.page {
+    width: 100%;
+    height: 100%;
+}
+
+.page__title {
+    height: 100%;
+    width: 731px;
+}
+
+.title__text {
     font-style: Bold;
     letter-spacing: -1.5px;
     font: 700 140px/180px Golos UI, sans-serif;
 }
 
-.text {
+.title__image {
+    width: 462px;
+    height: 501px;
+}
+
+.page__login {
+    height: 100%;
+    width: 602px;
+}
+
+
+
+.login__text {
     font-style: Regular;
     letter-spacing: -0.15px;
     font: 15px/18px Golos UI, sans-serif;
 }
 
-.text_help{
+.login__text-help{
     font-style: Regular;
     letter-spacing: -0.08px;
     color: #808080;
     font: 13px/16px Golos UI, sans-serif;
 }
 
-.image {
-    width: 462px;
-    height: 501px;
-}
 
-.image_eye {
+
+.login__image-eye {
     width: 22px;
     height: 22px;
 }
 
-.input {
+.login__input {
     width: 343px;
     height: 44px;
     border-radius: 10px;
 }
 
-.button {
+.login__button {
     width: 343px;
     height: 48px;
     color: white;
