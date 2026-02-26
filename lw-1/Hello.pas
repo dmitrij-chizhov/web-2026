@@ -9,21 +9,26 @@ BEGIN
   QueryString := GetEnv('QUERY_STRING');
   PosName := Pos('name=', QueryString);
 
-  IF PosName > 0 
+  IF PosName = 1
   THEN
     BEGIN
       Delete(QueryString, 1, PosName + 4);
-      PosName := Pos('&', QueryString);
-      IF PosName > 0 
-      THEN 
-        Name := Copy(QueryString, 1, PosName - 1)
+      IF Length(QueryString) > 0
+      THEN
+        BEGIN
+          PosName := Pos('&', QueryString);
+          IF PosName > 0
+          THEN
+            Name := Copy(QueryString, 1, PosName - 1)
+          ELSE
+            Name := QueryString
+        END
       ELSE
-        Name := QueryString
+        Name := 'Anonymous';
     END
   ELSE
     Name := 'Anonymous';
 
-  
   WRITELN('Content-Type: text/html');
   WRITELN;
   WRITELN('Hello dear, ', Name, '!')
