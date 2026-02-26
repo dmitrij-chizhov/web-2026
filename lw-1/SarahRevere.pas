@@ -1,6 +1,7 @@
 PROGRAM PrintName(INPUT, OUTPUT);
 USES
   DOS;
+
 VAR
   QueryString, Lanterns: STRING;
   PosLanterns: INTEGER;

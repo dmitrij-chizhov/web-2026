@@ -16,19 +16,15 @@ BEGIN
       PosName := Pos('&', QueryString);
       IF PosName > 0 
       THEN 
-        BEGIN
-          Name := Copy(QueryString, 1, PosName - 1);
-          Delete(QueryString, 1, PosName)
-        END
+        Name := Copy(QueryString, 1, PosName - 1)
       ELSE
         Name := QueryString
-    END;
+    END
   ELSE
     Name := 'Anonymous';
 
   
-  WRITELN(‘HTTP/2 200 Ok’);
   WRITELN('Content-Type: text/html');
   WRITELN;
-  WRITELN('Ïðèâåò, ', Name, '!')
+  WRITELN('Hello dear, ', Name, '!')
 END.
