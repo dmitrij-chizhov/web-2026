@@ -7,35 +7,24 @@ VAR
 
 FUNCTION GetQueryStringParameter(Key: STRING): STRING;
 VAR
-  PosStr, PosEnd: INTEGER;
-  Str: STRING;
+  PosStr: INTEGER;
+  Str, Temp: STRING;
 BEGIN
-  Str := '';
+  Str := ' ';
+  QueryString := '&' + QueryString;
+  Key := '&' + Key + '=';
 
   PosStr := Pos(Key, QueryString);
-  IF (PosStr = 1) OR (PosStr = (Pos('?', QueryString) + 1)) OR (PosStr = (Pos('&', QueryString) + 1))
+  IF PosStr > 0
   THEN
     BEGIN
-      Delete(QueryString, 1, PosStr + Length(Key) - 1);
-      PosStr := Pos('&', QueryString);
+      Temp := Copy(QueryString, PosStr + Length(Key), Length(QueryString));
+      PosStr := Pos('&', Temp);
       IF PosStr > 0
       THEN
-        BEGIN
-          Str := Copy(QueryString, 1, PosStr - 1);
-          Delete(QueryString, 1, PosStr)
-        END
+        Str := Copy(Temp, 1, PosStr - 1)
       ELSE
-        BEGIN
-          PosStr := Pos('?', QueryString);
-          IF PosStr > 0
-          THEN
-            BEGIN
-              Str := Copy(QueryString, 1, PosStr - 1);
-              Delete(QueryString, 1, PosStr)
-            END
-          ELSE
-            Str := Copy(QueryString, 1, Length(QueryString))
-        END
+        Str := Copy(Temp, 1, Length(Temp))
     END;
 
   GetQueryStringParameter := Str
@@ -44,9 +33,9 @@ END;
 BEGIN
   QueryString := GetEnv('QUERY_STRING');
 
-  WRITELN('Content-Type: text/html');
+  WRITELN('Content-Type: text/plain');
   WRITELN;
-  WRITELN('First Name: ', GetQueryStringParameter('first_name='));
-  WRITELN('Last Name: ', GetQueryStringParameter('last_name='));
-  WRITELN('Age: ', GetQueryStringParameter('age='))
+  WRITELN('First Name: ', GetQueryStringParameter('first_name'));
+  WRITELN('Last Name: ', GetQueryStringParameter('last_name'));
+  WRITELN('Age: ', GetQueryStringParameter('age'))
 END.
