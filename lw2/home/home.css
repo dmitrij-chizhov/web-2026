@@ -105,10 +105,12 @@
     letter-spacing: -0.15px;
     font: 15px/18px 'Golos UI Regular', sans-serif;
     color: #808080;
+    display: block;
 }
 
 .content__text-time {
     letter-spacing: -0.15px;
     font: 14px/18px 'Golos UI Regular', sans-serif;
     color: #22222280;
+    display: block;
 }
