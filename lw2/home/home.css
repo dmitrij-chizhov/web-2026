@@ -43,11 +43,9 @@
 }
 
 .info__text-avatar {
-    font-style: Regular;
     letter-spacing: -0.15px;
-    font: 500 14px/18px Golos UI, sans-serif;
+    font: 500 14px/18px 'Golos UI Medium', sans-serif;
     display: inline;
-    
 }
 
 .post__content {
@@ -70,9 +68,8 @@
     height: 30px;
     border-radius: 8px;
     background: #2222220D;
-    font-style: Regular;
     letter-spacing: -0.15px;
-    font: 15px/18px Golos UI, sans-serif;
+    font: 15px/18px 'Golos UI Regular', sans-serif;
     text-align: center;
 }
 
@@ -80,9 +77,8 @@
     width: 68px;
     height: 30px;
     border-radius: 8px;
-    font-style: Regular;
     letter-spacing: -0.15px;
-    font: 15px/18px Golos UI, sans-serif;
+    font: 15px/18px 'Golos UI Regular', sans-serif;
     text-align: center;
     color: #740000;
     border: 1px solid #FF000030;
@@ -90,9 +86,8 @@
 }
 
 .content__text {
-    font-style: Regular;
     letter-spacing: -0.15px;
-    font: 15px/18px Golos UI, sans-serif;
+    font: 15px/18px 'Golos UI Regular', sans-serif;
 }
 
 .content__number-of-photo {
@@ -100,24 +95,20 @@
     height: 24px;
     border-radius: 20px;
     background: #22222280;
-    font-style: Regular;
     letter-spacing: -0.15px;
-    font: 15px/18px Golos UI, sans-serif;
+    font: 15px/18px 'Golos UI Regular', sans-serif;
     text-align: center;
     color: #FFFFFF;
 }
 
 .content__text-continuation {
-    font-style: Regular;
     letter-spacing: -0.15px;
-    font: 15px/18px Golos UI, sans-serif;
+    font: 15px/18px 'Golos UI Regular', sans-serif;
     color: #808080;
-
 }
 
 .content__text-time {
-    font-style: Regular;
     letter-spacing: -0.15px;
-    font: 14px/18px Golos UI, sans-serif;
+    font: 14px/18px 'Golos UI Regular', sans-serif;
     color: #22222280;
 }
