@@ -6,6 +6,7 @@
 .page__menu {
     width: 10%;
     height: 100%;
+    text-decoration: none;
 }
 
 .menu__image-service{
