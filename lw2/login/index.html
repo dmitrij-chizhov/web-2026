@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Loign</title>
+        <title>Login</title>
         <meta charset="UTF-8">
         <link href="./login.css" rel="stylesheet">
         <link href="../font/font.css" rel="stylesheet">
@@ -10,16 +10,16 @@
         <div class="page">
             <div class="page__title">   
                 <h1 class="title__text">Войти</h1>
-                <img src="../images/man.png" class="title__image" alt="Man" height="462px" width="501px">
+                <img src="../images/man.png" class="title__image" alt="Man" height="462" width="501">
             </div>
             <form class="page__login">
-                <p class="login__text">Электропочта</p>
-                <input type="email" class="login__input">
+                <label class="login__text" for="email">Электропочта</label>
+                <input id="email" type="email" class="login__input">
                 <p class="login__text-help">Введите электропочту в формате *****@***.**</p>
-                <p class="login__text">Пароль</p>
-                <input type="password" class="login__input">
-                <img src="../images/eye-off.png" class="login__image-eye" alt="Eye-off"> 
-                <button class="login__button" href="#" title="Продолжить">Продолжить</button>
+                <label class="login__text" for="password">Пароль</label>
+                <input id="password" type="password" class="login__input">
+                <img src="../images/eye-off.png" class="login__image-eye" alt="Show password"> 
+                <button class="login__button" title="Продолжить">Продолжить</button>
             </form>
         </div>
     </body>
