@@ -33,43 +33,43 @@ for ($i = 0; $i < strlen($date); $i++){
 
 if ($day > 0 && $month > 0 && $year > 0) {
     if (($month == 3 && $day >= 21) || ($month == 4 && $day <= 20)) {
-        echo $zodiac[0] . "<br/>";
+        echo $zodiac[0];
     }
     else if (($month == 4 && $day >= 21) || ($month == 5 && $day <= 20)) {
-        echo $zodiac[1] . "<br/>";
+        echo $zodiac[1];
     }
     else if (($month == 5 && $day >= 21) || ($month == 6 && $day <= 21)) {
-        echo $zodiac[2] . "<br/>";
+        echo $zodiac[2];
     }
     else if (($month == 6 && $day >= 22) || ($month == 7 && $day <= 22)) {
-        echo $zodiac[3] . "<br/>";
+        echo $zodiac[3];
     }
     else if (($month == 7 && $day >= 23) || ($month == 8 && $day <= 20)) {
-        echo $zodiac[4] . "<br/>";
+        echo $zodiac[4];
     }
     else if (($month == 8 && $day >= 24) || ($month == 9 && $day <= 23)) {
-        echo $zodiac[5] . "<br/>";
+        echo $zodiac[5];
     }
     else if (($month == 9 && $day >= 24) || ($month == 10 && $day <= 23)) {
-        echo $zodiac[6] . "<br/>";
+        echo $zodiac[6];
     }
     else if (($month == 10 && $day >= 24) || ($month == 11 && $day <= 22)) {
-        echo $zodiac[7] . "<br/>";
+        echo $zodiac[7];
     }
     else if (($month == 11 && $day >= 23) || ($month == 12 && $day <= 21)) {
-        echo $zodiac[8] . "<br/>";
+        echo $zodiac[8];
     }
     else if (($month == 12 && $day >= 22) || ($month == 1 && $day <= 20)) {
-        echo $zodiac[9] . "<br/>";
+        echo $zodiac[9];
     }
     else if (($month == 1 && $day >= 21) || ($month == 2 && $day <= 20)) {
-        echo $zodiac[10] . "<br/>";
+        echo $zodiac[10];
     }
     else if (($month == 2 && $day >= 21) || ($month == 3 && $day <= 20)) {
-        echo $zodiac[11] . "<br/>";
-    }
+        echo $zodiac[11];
+    }  
 }
 else {
-    echo "Uncorrected data<br/>";
+    echo "Uncorrected data";
 }
-
+echo "<br/>";

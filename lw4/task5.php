@@ -9,14 +9,26 @@ function Factorial(int $number): ?int {
     }
 }
 
+function IsNumber(string $str){
+    for ($i = 0; $i < strlen($str); $i++){
+        if ($str[$i] < '0' || $str[$i] > '9'){
+            return false;
+        }
+    }
+    return true;
+}
 
-$number = (int)$_POST['number'];
+if (IsNumber((string)$_POST['number'])){
+    $number = (int)$_POST['number'];
+}else{
+    $number = -1;
+}
 
 if ($number >= 0) {
     $factorial = Factorial($number);
-    echo $factorial . "<br/>";
+    echo $factorial;
 }
 else {
-    echo "The value should be positive<br/>";
+    echo "The value should be positive";
 }
-
+echo "<br/>";

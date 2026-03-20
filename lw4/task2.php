@@ -1,38 +1,53 @@
 <?php
 
-$digit = (int)$_POST['digit'];
+function IsNumber(string $str){
+    for ($i = 0; $i < strlen($str); $i++){
+        if ($str[$i] < '0' || $str[$i] > '9'){
+            return false;
+        }
+    }
+    return true;
+}
+
+if ((string)$_POST['digit']) {
+    $digit = (int)$_POST['digit'];
+} else {
+    $digit = -1;
+}
+
 
 switch ($digit) {
     case 0:
-        echo "Zero<br/>";
+        echo "Zero";
         break;
     case 1:
-        echo "One<br/>";
+        echo "One";
         break;
     case 2:
-        echo "Two<br/>";
+        echo "Two";
         break;
     case 3:
-        echo "Three<br/>";
+        echo "Three";
         break;
     case 4:
-        echo "Four<br/>";
+        echo "Four";
         break;
     case 5:
-        echo "Five<br/>";
+        echo "Five";
         break;
     case 6:
-        echo "Six<br/>";
+        echo "Six";
         break;
     case 7:
-        echo "Seven<br/>";
+        echo "Seven";
         break;
     case 8:
-        echo "Eight<br/>";
+        echo "Eight";
         break;
     case 9:
-        echo "Nine<br/>";
+        echo "Nine";
         break;
     default:
-        echo "Unknown<br/>";
+        echo "Unknown";
 }
+echo "<br/>";
