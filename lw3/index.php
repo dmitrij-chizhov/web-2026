@@ -7,6 +7,6 @@
 </head>
 <body>
   <div>Всем привет</div>
-  <div>Версия PHP: <?php print phpversion(); ?></div>
+  <div>Версия PHP: <?php print phpversion() ?></div>
 </body>
 </html>

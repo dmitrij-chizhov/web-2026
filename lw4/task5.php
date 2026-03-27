@@ -18,17 +18,17 @@ function IsNumber(string $str){
     return true;
 }
 
-if (IsNumber((string)$_POST['number'])){
+if (IsNumber((string)$_POST['number'])) {
     $number = (int)$_POST['number'];
-}else{
+} else {
     $number = -1;
 }
 
-if ($number >= 0) {
+if ($number >= 0 && $number <= 20) {
     $factorial = Factorial($number);
     echo $factorial;
 }
 else {
-    echo "The value should be positive";
+    echo "The value should be positive integer and <= 20";
 }
 echo "<br/>";

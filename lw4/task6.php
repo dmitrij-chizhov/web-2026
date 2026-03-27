@@ -1,6 +1,6 @@
 <?php 
 
-function splitTokens($string)
+function SplitTokens($string)
 {
     $tokens = [];
     $current = "";
@@ -25,14 +25,14 @@ function splitTokens($string)
     return $tokens;
 }
 
-function isDigit($ch)
+function IsDigit($ch)
 {
     return $ch >= '0' && $ch <= '9';
 }
 
-function calculateRPN($expr)
+function CalculateRPN($expr)
 {
-    $tokens = splitTokens($expr);
+    $tokens = SplitTokens($expr);
 
     $stack = [];
     $top = -1;
@@ -40,7 +40,7 @@ function calculateRPN($expr)
     for ($i = 0; $i < count($tokens); $i++) {
         $token = $tokens[$i];
 
-        if (isDigit($token)) {
+        if (IsDigit($token)) {
             $top++;
             $stack[$top] = (int)$token;
         } else {
@@ -76,8 +76,7 @@ function calculateRPN($expr)
     return $stack[0];
 }
 
-$result = "";
 $input = (string)$_POST["expression"];
-$result = calculateRPN($input);
+$result = CalculateRPN($input);
 
 echo $result . '</br>';
