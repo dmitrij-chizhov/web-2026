@@ -13,11 +13,11 @@
     <div class="post-preview__content">
         <?php if (!empty($post['img_content'])): ?>
             <div class="content__image-container"> 
-                <a class="image-container__link" title="<?= $post['title'] ?>" href="post.php?id=<?= $post['id'] ?>"> 
-                    <img src="<?= $post['img_content'] ?>" class="image-container__image" alt="Post content">
+                <a class="image-container__link" title="<?= $post['title'] ?>" href="post/<?= $post['id'] ?>"> 
+                    <img src="<?= $post['img_content'][0] ?>" class="image-container__image" alt="Post content">
                 </a>
-                <?php if (!empty($post['number_of_photo'])): ?>
-                    <span class="content__image-counter"><?= $post['number_of_photo'] ?></span>
+                <?php if (!empty($post['number_of_photo']) && $post['number_of_photo'] > 1): ?>
+                    <span class="content__image-counter">1/<?= $post['number_of_photo'] ?></span>
                 <?php endif; ?>
             </div>
         <?php endif; ?>  

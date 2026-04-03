@@ -9,11 +9,14 @@ $posts = [
         'id' => 1,
         'title' => 'Post Ivan',
         'subtitle' => 'Post',
-        'img_modifier' => '../images/avatar-vania.png',
+        'img_modifier' => '../../images/avatar-vania.png',
         'author' => 'Ваня Денисов',
-        'edit' => '../images/edit.png',
-        'img_content' => '../images/photo1.png',
-        'number_of_photo' => '1/3',
+        'edit' => '../../images/edit.png',
+        'img_content' => ['../../images/photo1.png',
+        '../../images/photo3.png',
+        '../../images/photo4.png',
+        ],
+        'number_of_photo' => '3',
         'reaction_number' => '203',
         'reaction_active' => '',
         'text' => 'Так красиво сегодня на улице! Настоящая зима)) 
@@ -26,11 +29,11 @@ $posts = [
         'id' => 2,
         'title' => 'Post Elizaveta',
         'subtitle' => 'Post',
-        'img_modifier' => '../images/avatar-elizaveta.png',
+        'img_modifier' => '../../images/avatar-elizaveta.png',
         'author' => 'Лиза Дёмина',
         'edit' => '',
-        'img_content' => '../images/photo2.jpg',
-        'number_of_photo' => '',
+        'img_content' => ['../../images/photo2.jpg'],
+        'number_of_photo' => '1',
         'reaction_number' => '534',
         'reaction_active' => '-active',
         'text' => '',
@@ -46,7 +49,6 @@ foreach ($posts as $post) {
         break; 
     }
 }
-
 ?>
 
 
@@ -56,20 +58,20 @@ foreach ($posts as $post) {
     <head>
         <title>Home</title>
         <meta charset="UTF-8">
-        <link href="./home.css" rel="stylesheet">
+        <link href="../home.css" rel="stylesheet">
         <link href="../font/font.css" rel="stylesheet">
     </head>
     <body>
         <div class="page">
             <nav class="page__menu">
                 <a href="#" title="Home">
-                    <img src="../images/home.png" class="menu__image-service" alt="Home" height="40" width="40">
+                    <img src="../../images/home.png" class="menu__image-service" alt="Home" height="40" width="40">
                 </a>
                 <a href="/profile" title="Profile">
-                    <img src="../images/profile.png" class="menu__image-service" alt="Profile" height="40" width="40">
+                    <img src="../../images/profile.png" class="menu__image-service" alt="Profile" height="40" width="40">
                 </a>
                 <a href="#" title="Plus">
-                    <img src="../images/plus.png" class="menu__image-service" alt="Plus" height="40" width="40">
+                    <img src="../../images/plus.png" class="menu__image-service" alt="Plus" height="40" width="40">
                 </a>              
             </nav>
             <div class="page__main-content">
@@ -88,16 +90,15 @@ foreach ($posts as $post) {
                     <div class="post-preview__content">
                         <?php if (!empty($foundPost['img_content'])): ?>
                             <div class="content__image-container"> 
-                                <img src="<?= $foundPost['img_content'] ?>" class="image-container__image" alt="Post content">
-                                <?php if (!empty($foundPost['number_of_photo'])): ?>
-                                    <span class="content__image-counter"><?= $foundPost['number_of_photo'] ?></span>
-                                <?php endif; ?>
+                                <?php foreach ($foundPost['img_content'] as $image): ?>
+                                    <img src="<?= $image ?>" class="image-container__image" alt="Post content">
+                                <?php endforeach;?>
                             </div>
                         <?php endif; ?>  
                         <div class="content__footer"> 
                             <div class="footer__actions">
                                 <button class="actions__reaction<?= $foundPost['reaction_active'] ?>">
-                                    <img src="../images/like.png" class="actions__image-reaction" alt="like">
+                                    <img src="../../images/like.png" class="actions__image-reaction" alt="like">
                                     <?= $foundPost['reaction_number'] ?>
                                 </button>
                             </div>

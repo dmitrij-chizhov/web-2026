@@ -11,17 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit; 
 }
 
-$title = $_POST['title'] ?? 'Без заголовка';
-$subtitle = $_POST['subtitle'] ?? '';
-$text = $_POST['text'] ?? 'Нет содержимого.';
-$author = $_POST['author'] ?? 'Без автора.';
-$time_post = time();
-
 $uploadStatus = 'No file uploaded';
 $uploadedFilePath = null;
 
 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-    
     $tmpName = $_FILES['image']['tmp_name'];
     
     $fileName = basename(preg_replace("/[^a-zA-Z0-9\.\-\_]/", "", $_FILES['image']['name']));
@@ -42,13 +35,6 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 $response = [
     'status' => 'success',
     'message' => 'Данные успешно получены.',
-    'received_data' => [
-        'title' => $title,
-        'subtitle' => $subtitle,
-        'text' => $text,
-        'author' => $author,
-        'time_post' => $time_post,
-    ],
     'file_info' => [
         'status' => $uploadStatus,
         'path' => $uploadedFilePath,
