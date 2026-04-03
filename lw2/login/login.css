@@ -1,58 +1,84 @@
-.page {
-    width: 100%;
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Golos UI Regular', sans-serif;
+    background-color: #f0f2f5;
     height: 100%;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
 }
 
 .page__title {
-    height: 100%;
-    width: 731px;
+    width: auto;
 }
 
 .title__text {
+    margin: 0;
     letter-spacing: -1.5px;
     font: 700 140px/180px 'Golos UI Bold', sans-serif;
 }
 
 .title__image {
+    display: block;
     width: 462px;
     height: 501px;
 }
 
 .page__login {
-    height: 100%;
-    width: 602px;
+    width: 343px;
 }
 
 .login__text {
+    display: block;
     letter-spacing: -0.15px;
     font: 15px/18px 'Golos UI Regular', sans-serif;
+    margin-bottom: 5px;
 }
 
-.login__text-help{
+.login__text-help {
     letter-spacing: -0.08px;
     color: #808080;
     font: 13px/16px 'Golos UI Regular', sans-serif;
+    margin: 5px 0 10px;
+}
+
+.login__input-wrapper {
+    position: relative;
+}
+
+.login__input {
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    padding-right: 40px;
 }
 
 .login__image-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 22px;
     height: 22px;
 }
 
-.login__input {
-    width: 343px;
-    height: 44px;
-    border-radius: 10px;
-}
-
 .login__button {
-    width: 343px;
+    margin-top: 27px;
+    width: 100%;
     height: 48px;
     color: white;
     background-color: #000000;
     font: 500 16px/1 'Golos UI Medium', sans-serif;
-    text-decoration: none;
-    display: block;
+    border: none;
     border-radius: 10px;
     text-align: center;
 }
