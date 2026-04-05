@@ -25,12 +25,12 @@
             <div class="footer__actions">
                 <button class="actions__reaction<?= $post['reaction_active'] ?>">
                     <img src="../images/like.png" class="actions__image-reaction" alt="like">
-                    <?= $post['reaction_number'] ?>
+                    <p class="actions__reaction-number"><?= $post['reaction_number'] ?></p>
                 </button>
             </div>
             <?php if (!empty($post['text'])): ?>
                 <p class="footer__text">
-                    <?= $post['text'] ?>
+                    <?= $post['text'] ?><br>
                     <?php if (!empty($post['more_info'])): ?>
                         <a class="text__more-link" title="<?= $post['more_info'] ?>" href="post.php?id=<?= $post['id'] ?>"><?= $post['more_info'] ?></a>
                     <?php endif; ?>

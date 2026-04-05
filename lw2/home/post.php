@@ -59,13 +59,13 @@ foreach ($posts as $post) {
         <title>Home</title>
         <meta charset="UTF-8">
         <link href="../home.css" rel="stylesheet">
-        <link href="../font/font.css" rel="stylesheet">
+        <link href="../../font/font.css" rel="stylesheet">
     </head>
     <body>
         <div class="page">
             <nav class="page__menu">
                 <a href="#" title="Home">
-                    <img src="../../images/home.png" class="menu__image-service" alt="Home" height="40" width="40">
+                    <img src="../../images/home-target.png" class="menu__image-service" alt="Home" height="40" width="40">
                 </a>
                 <a href="/profile" title="Profile">
                     <img src="../../images/profile.png" class="menu__image-service" alt="Profile" height="40" width="40">
@@ -99,15 +99,12 @@ foreach ($posts as $post) {
                             <div class="footer__actions">
                                 <button class="actions__reaction<?= $foundPost['reaction_active'] ?>">
                                     <img src="../../images/like.png" class="actions__image-reaction" alt="like">
-                                    <?= $foundPost['reaction_number'] ?>
+                                    <p class="actions__reaction-number"><?= $foundPost['reaction_number'] ?></p>
                                 </button>
                             </div>
                             <?php if (!empty($foundPost['text'])): ?>
                                 <p class="footer__text">
-                                    <?= $foundPost['text'] ?>
-                                    <?php if (!empty($foundPost['more_info'])): ?>
-                                        <a href="#" class="text__more-link"><?= $foundPost['more_info'] ?></a>
-                                    <?php endif; ?>
+                                    <?= $foundPost['text'] ?><br>
                                 </p>
                             <?php endif; ?>
                             <span class="footer__time"><?= $foundPost['time_post'] ?></span>

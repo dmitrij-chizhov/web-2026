@@ -13,7 +13,8 @@ body, html {
 
 .page__menu {
     flex-shrink: 0;
-    padding: 20px;
+    padding: 16px;
+    padding-top: 48px;
     border-right: 1px solid #ddd;
     background-color: #fff;
 }
@@ -22,13 +23,14 @@ body, html {
     width: 40px;
     height: 40px;
     display: block;
-    margin-bottom: 15px; 
+    margin-bottom: 16px; 
 }
 
 .page__main-content {
     flex-grow: 1; 
     display: flex; 
-    flex-direction: column;    
+    flex-direction: column;   
+    margin-top: 53px;   
     padding: 20px;
     align-items: center;
 }   
@@ -61,7 +63,7 @@ body, html {
 
 .info__text {
     letter-spacing: -0.15px;
-    font: 15px/18px 'Golos UI Regylar', sans-serif;
+    font: 15px/18px 'Golos UI Regular', sans-serif;
     width: 361px;
     height: 36px;
     text-align: center;
@@ -75,9 +77,13 @@ body, html {
     border-radius: 6px;
     background-color: #F2F3F5;
     letter-spacing: -0.15px;
-    font: 15px/18px 'Golos UI Regylar', sans-serif;
+    font: 15px/18px 'Golos UI Regular', sans-serif;
     margin-top: 12px;
     margin-bottom: 42px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
 }
 
 .info__text-avatar {
@@ -90,10 +96,10 @@ body, html {
 
 .user__content {
     width: 980px;
-    height: 100%;
 }
 
 .content__image {
     width: 322px;
     height: 322px;
+    border-radius: 2px;
 }

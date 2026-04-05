@@ -48,7 +48,7 @@ $posts = [
         <div class="page">
             <nav class="page__menu">
                 <a href="#" title="Home">
-                    <img src="../images/home.png" class="menu__image-service" alt="Home" height="40" width="40">
+                    <img src="../images/home-target.png" class="menu__image-service" alt="Home" height="40" width="40">
                 </a>
                 <a href="/profile" title="Profile">
                     <img src="../images/profile.png" class="menu__image-service" alt="Profile" height="40" width="40">
