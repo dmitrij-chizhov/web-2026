@@ -1,42 +1,58 @@
 <div class="post-preview">         
     <div class="post-preview__info">
         <div class="info__user"> 
-            <?php if (!empty($post['img_modifier'])): ?>
-                <img src="<?= $post['img_modifier'] ?>" class="user__avatar" alt="Avatar">
+            <?php if ($post['avatar_url']): ?>
+                <a href="/profile/index/<?= htmlspecialchars($post['user_id']) ?>">
+                    <img src="<?= htmlspecialchars($post['avatar_url']) ?>" class="user__avatar" alt="Avatar">
+                </a>
             <?php endif; ?>
-            <span class="user__author"><?= $post['author'] ?></span>
+            <a href="/profile/index/<?= htmlspecialchars($post['user_id']) ?>" class="user__author">
+                <p class="user__author"><?= htmlspecialchars($post['user_name']) ?></p>
+            </a>
         </div>
-        <?php if (!empty($post['edit'])): ?>
-            <img src="<?= $post['edit'] ?>" class="user__edit-icon" alt="Edit">
+        <?php if ($post['user_id'] == 1): ?>
+            <img src="../../images/edit.png" class="user__edit-icon" alt="Edit">
         <?php endif; ?>
     </div>
     <div class="post-preview__content">
-        <?php if (!empty($post['img_content'])): ?>
-            <div class="content__image-container"> 
+        <?php if ($post['first_image_url']): ?>
+            <div class="content__image-container">
                 <a class="image-container__link" title="<?= $post['title'] ?>" href="post/<?= $post['id'] ?>"> 
-                    <img src="<?= $post['img_content'][0] ?>" class="image-container__image" alt="Post content">
+                    <img src="<?= ($post['first_image_url']) ?>" class="image-container__image" alt="Превью поста">
                 </a>
-                <?php if (!empty($post['number_of_photo']) && $post['number_of_photo'] > 1): ?>
-                    <span class="content__image-counter">1/<?= $post['number_of_photo'] ?></span>
+                <?php if ($post['photo_count'] > 1): ?>
+                    <span class="content__image-counter">1/<?= $post['photo_count'] ?></span>
                 <?php endif; ?>
             </div>
-        <?php endif; ?>  
+        <?php endif; ?> 
         <div class="content__footer"> 
             <div class="footer__actions">
-                <button class="actions__reaction<?= $post['reaction_active'] ?>">
+                <button class="actions__reaction">
                     <img src="../images/like.png" class="actions__image-reaction" alt="like">
-                    <p class="actions__reaction-number"><?= $post['reaction_number'] ?></p>
+                    <p class="actions__reaction-number"><?= $post['like_count'] ?></p>
                 </button>
             </div>
-            <?php if (!empty($post['text'])): ?>
+            <?php if ($post['content']) {
+                $truncatedText = htmlspecialchars($post['content']); 
+                $originalLength = mb_strlen($truncatedText, 'UTF-8'); 
+                if ($originalLength > MAX_TEXT_LENGTH) {
+                    $truncatedText = mb_substr($truncatedText, 0, MAX_TEXT_LENGTH, 'UTF-8') . '...';
+                    $moreInfo = true;
+                } else {
+                    $moreInfo = false;
+                }
+                ?>
                 <p class="footer__text">
-                    <?= $post['text'] ?><br>
-                    <?php if (!empty($post['more_info'])): ?>
-                        <a class="text__more-link" title="<?= $post['more_info'] ?>" href="post.php?id=<?= $post['id'] ?>"><?= $post['more_info'] ?></a>
+                    <?= $truncatedText ?>
+                    <?php if ($moreInfo): ?>
+                        <br>
+                        <a href="post/<?= htmlspecialchars($post['id']) ?>" class="text__more-link">ещё</a>
                     <?php endif; ?>
                 </p>
-            <?php endif; ?>
-            <span class="footer__time"><?= $post['time_post'] ?></span>
+                <?php
+            }
+            ?>
+            <span class="footer__time"><?= formatRelativeTime($post['created_time']) ?></span>
         </div>
     </div>
 </div>

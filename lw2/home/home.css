@@ -68,6 +68,8 @@ body, html {
 
 .user__author {
     font: 500 14px 'Golos UI Medium', sans-serif;
+    color: #000;
+    text-decoration: none;
 }
 
 .user__edit-icon {

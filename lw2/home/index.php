@@ -1,39 +1,67 @@
 <?php
-$posts = [
-    [
-        'id' => 1,
-        'title' => 'Post Ivan',
-        'img_modifier' => '../images/avatar-vania.png',
-        'author' => 'Ваня Денисов',
-        'edit' => '../images/edit.png',
-        'img_content' => ['../images/photo1.png',
-        '../images/photo3png',
-        '../images/photo4png',
-        ],
-        'number_of_photo' => '3',
-        'reaction_number' => '203',
-        'reaction_active' => '',
-        'text' => 'Так красиво сегодня на улице! Настоящая зима)) 
-              Вспоминается Бродский: «Поздно ночью, в уснувшей долине, 
-              на самом дне, в городке, занесенном снегом по ручку двери...» ',
-        'more_info' => 'ещё',
-        'time_post' => '2 часа назад'
-    ],
-    [
-        'id' => 2,
-        'title' => 'Post Elizaveta',
-        'img_modifier' => '../images/avatar-elizaveta.png',
-        'author' => 'Лиза Дёмина',
-        'edit' => '',
-        'img_content' => ['../images/photo2.jpg'],
-        'number_of_photo' => '1',
-        'reaction_number' => '534',
-        'reaction_active' => '-active',
-        'text' => '',
-        'more_info' => '',
-        'time_post' => '1 день назад'
-    ]
-];
+require_once '../data/db.php';
+
+$sql = "
+    SELECT
+        p.id,
+        p.title,
+        p.content,        
+        p.created_time,  
+        p.like_count,
+        p.user_id,        
+        u.user_name,
+        u.avatar_url,
+        COUNT(pi.id) AS photo_count,
+        (SELECT image_url FROM post_images WHERE post_id = p.id ORDER BY display_order ASC LIMIT 1) AS first_image_url
+    FROM
+        posts AS p
+    JOIN
+        users AS u ON p.user_id = u.id
+    LEFT JOIN
+        post_images AS pi ON p.id = pi.post_id
+    GROUP BY
+        p.id
+    ORDER BY
+        p.created_time DESC; 
+";
+
+$result = $conn->query($sql);
+$posts = [];
+if ($result) {
+    $posts = $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function formatRelativeTime($timestamp) {
+    $now = time() + 10800; 
+    $postTime = strtotime($timestamp); 
+    $diff = $now - $postTime; 
+
+    if ($diff < 60) {
+        return $diff . ' секунд назад';
+    } elseif ($diff < 3600) { 
+        $minutes = floor($diff / 60);
+        return $minutes . ' минут назад';
+    } elseif ($diff < 86400) { 
+        $hours = floor($diff / 3600);
+        return $hours . ' часов назад';
+    } elseif ($diff < 604800) { 
+        $days = floor($diff / 86400);
+        return $days . ' дней назад';
+    } elseif ($diff < 2592000) { 
+        $weeks = floor($diff / 604800);
+        return $weeks . ' недель назад';
+    } elseif ($diff < 31536000) { 
+        $months = floor($diff / 2592000);
+        return $months . ' месяцев назад';
+    } else {
+        $years = floor($diff / 31536000);
+        return $years . ' лет назад';
+    }
+}
+
+$conn->close();
+
+const MAX_TEXT_LENGTH = 135
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +78,7 @@ $posts = [
                 <a href="#" title="Home">
                     <img src="../images/home-target.png" class="menu__image-service" alt="Home" height="40" width="40">
                 </a>
-                <a href="/profile" title="Profile">
+                <a href="/profile/index/1" title="Profile">
                     <img src="../images/profile.png" class="menu__image-service" alt="Profile" height="40" width="40">
                 </a>
                 <a href="#" title="Plus">

@@ -1,54 +1,71 @@
 <?php
+require_once '../data/db.php';
 $postId = null;
 if (isset($_GET['id'])) {
-    $postId = (int)$_GET['id']; 
+    $postId = (int)$_GET['id'];
 }
 
-$posts = [
-    [
-        'id' => 1,
-        'title' => 'Post Ivan',
-        'subtitle' => 'Post',
-        'img_modifier' => '../../images/avatar-vania.png',
-        'author' => 'Ваня Денисов',
-        'edit' => '../../images/edit.png',
-        'img_content' => ['../../images/photo1.png',
-        '../../images/photo3.png',
-        '../../images/photo4.png',
-        ],
-        'number_of_photo' => '3',
-        'reaction_number' => '203',
-        'reaction_active' => '',
-        'text' => 'Так красиво сегодня на улице! Настоящая зима)) 
-              Вспоминается Бродский: «Поздно ночью, в уснувшей долине, 
-              на самом дне, в городке, занесенном снегом по ручку двери...» ',
-        'more_info' => 'ещё',
-        'time_post' => '2 часа назад'
-    ],
-    [
-        'id' => 2,
-        'title' => 'Post Elizaveta',
-        'subtitle' => 'Post',
-        'img_modifier' => '../../images/avatar-elizaveta.png',
-        'author' => 'Лиза Дёмина',
-        'edit' => '',
-        'img_content' => ['../../images/photo2.jpg'],
-        'number_of_photo' => '1',
-        'reaction_number' => '534',
-        'reaction_active' => '-active',
-        'text' => '',
-        'more_info' => '',
-        'time_post' => '1 день назад'
-    ]
-];
+if (!$postId) {
+    die("Ошибка: ID поста не указан.");
+}
 
-$foundPost = null;
-foreach ($posts as $post) {
-    if ($post['id'] === $postId) {
-        $foundPost = $post;
-        break; 
+$sql = "SELECT p.*, u.user_name, u.avatar_url
+        FROM posts AS p
+        JOIN users AS u ON p.user_id = u.id
+        WHERE p.id = ?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $postId);
+$stmt->execute();
+$result = $stmt->get_result();
+$foundPost = $result->fetch_assoc(); 
+
+if ($foundPost) {
+    $foundPost['images'] = [];
+    $sql_images = "SELECT image_url FROM post_images WHERE post_id = ? ORDER BY display_order ASC";
+    
+    $stmt_images = $conn->prepare($sql_images);
+    $stmt_images->bind_param('i', $postId);
+    $stmt_images->execute();
+    $result_images = $stmt_images->get_result();
+
+    while ($row = $result_images->fetch_assoc()) {
+        $foundPost['images'][] = $row['image_url'];
+    }
+    
+    $stmt_images->close();
+}
+
+function formatRelativeTime($timestamp) {
+    $now = time() + 10800; 
+    $postTime = strtotime($timestamp); 
+    $diff = $now - $postTime; 
+
+    if ($diff < 60) {
+        return $diff . ' секунд назад';
+    } elseif ($diff < 3600) { 
+        $minutes = floor($diff / 60);
+        return $minutes . ' минут назад';
+    } elseif ($diff < 86400) { 
+        $hours = floor($diff / 3600);
+        return $hours . ' часов назад';
+    } elseif ($diff < 604800) { 
+        $days = floor($diff / 86400);
+        return $days . ' дней назад';
+    } elseif ($diff < 2592000) { 
+        $weeks = floor($diff / 604800);
+        return $weeks . ' недель назад';
+    } elseif ($diff < 31536000) { 
+        $months = floor($diff / 2592000);
+        return $months . ' месяцев назад';
+    } else {
+        $years = floor($diff / 31536000);
+        return $years . ' лет назад';
     }
 }
+
+$stmt->close();
+$conn->close();
 ?>
 
 
@@ -56,7 +73,7 @@ foreach ($posts as $post) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home</title>
+        <title><?= htmlspecialchars($foundPost['title']) ?></title>
         <meta charset="UTF-8">
         <link href="../home.css" rel="stylesheet">
         <link href="../../font/font.css" rel="stylesheet">
@@ -78,36 +95,34 @@ foreach ($posts as $post) {
                 <div class="post-preview">         
                     <div class="post-preview__info">
                         <div class="info__user"> 
-                            <?php if (!empty($foundPost['img_modifier'])): ?>
-                                <img src="<?= $foundPost['img_modifier'] ?>" class="user__avatar" alt="Avatar">
+                            <?php if ($foundPost['avatar_url']): ?>
+                                <img src="<?= htmlspecialchars($foundPost['avatar_url']) ?>" class="user__avatar" alt="Avatar">
                             <?php endif; ?>
-                            <span class="user__author"><?= $foundPost['author'] ?></span>
+                            <span class="user__author"><?= htmlspecialchars($foundPost['user_name']) ?></span>
                         </div>
-                        <?php if (!empty($foundPost['edit'])): ?>
-                            <img src="<?= $foundPost['edit'] ?>" class="user__edit-icon" alt="Edit">
+                        <?php if ($foundPost['user_id'] == 1): ?>
+                            <img src="../../images/edit.png" class="user__edit-icon" alt="Edit">
                         <?php endif; ?>
                     </div>
                     <div class="post-preview__content">
-                        <?php if (!empty($foundPost['img_content'])): ?>
-                            <div class="content__image-container"> 
-                                <?php foreach ($foundPost['img_content'] as $image): ?>
-                                    <img src="<?= $image ?>" class="image-container__image" alt="Post content">
-                                <?php endforeach;?>
+                        <?php if (!empty($foundPost['images'])): ?>
+                            <div class="content__image-container">
+                                <?php foreach ($foundPost['images'] as $imageUrl): ?>
+                                    <img src="<?= htmlspecialchars($imageUrl) ?>" class="image-container__image" alt="Post content">
+                                <?php endforeach; ?>
                             </div>
-                        <?php endif; ?>  
+                        <?php endif; ?>
                         <div class="content__footer"> 
                             <div class="footer__actions">
-                                <button class="actions__reaction<?= $foundPost['reaction_active'] ?>">
+                                <button class="actions__reaction">
                                     <img src="../../images/like.png" class="actions__image-reaction" alt="like">
-                                    <p class="actions__reaction-number"><?= $foundPost['reaction_number'] ?></p>
+                                    <p class="actions__reaction-number"><?= $foundPost['like_count'] ?></p>
                                 </button>
                             </div>
-                            <?php if (!empty($foundPost['text'])): ?>
-                                <p class="footer__text">
-                                    <?= $foundPost['text'] ?><br>
-                                </p>
+                            <?php if (!empty($foundPost['content'])): ?>
+                                <p class="footer__text"><?= htmlspecialchars($foundPost['content']) ?></p>
                             <?php endif; ?>
-                            <span class="footer__time"><?= $foundPost['time_post'] ?></span>
+                            <span class="footer__time"><?= formatRelativeTime($foundPost['created_time']) ?></span>
                         </div>
                     </div>
                 </div>
