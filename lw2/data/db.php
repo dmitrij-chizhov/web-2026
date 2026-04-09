@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
 $db_name = 'blog';
-$username = 'root'; // Стандартный пользователь в Laragon
-$password = '';     // У Laragon по умолчанию пустой пароль
+$username = 'root'; 
+$password = '';     
 
 $conn = new mysqli($host, $username, $password, $db_name);
 
