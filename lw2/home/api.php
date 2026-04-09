@@ -43,7 +43,6 @@ try {
 
     $uploaded_images = []; 
     
-    // Проверяем, были ли вообще отправлены файлы
     if (isset($_FILES['images']) && is_array($_FILES['images']['name'])) {
         
         $sql_images = "INSERT INTO post_images (post_id, image_url, display_order) VALUES (?, ?, ?)";
