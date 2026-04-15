@@ -63,7 +63,6 @@ $conn->close();
 
 const MAX_TEXT_LENGTH = 135
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -76,13 +75,13 @@ const MAX_TEXT_LENGTH = 135
         <div class="page">
             <nav class="page__menu">
                 <a href="#" title="Home">
-                    <img src="../images/home-target.png" class="menu__image-service" alt="Home" height="40" width="40">
+                    <img src="../images/home-target.png" class="menu__image-service-target" alt="Home" height="40px" width="40px">
                 </a>
                 <a href="/profile/index/1" title="Profile">
-                    <img src="../images/profile.png" class="menu__image-service" alt="Profile" height="40" width="40">
+                    <img src="../images/profile.png" class="menu__image-service" alt="Profile" height="24px" width="24px">
                 </a>
                 <a href="#" title="Plus">
-                    <img src="../images/plus.png" class="menu__image-service" alt="Plus" height="40" width="40">
+                    <img src="../images/plus.png" class="menu__image-service" alt="Plus" height="24px" width="24px">
                 </a>              
             </nav>
             <div class="page__main-content">

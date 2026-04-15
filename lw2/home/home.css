@@ -15,27 +15,36 @@ body, html {
     flex-shrink: 0;
     padding: 16px;
     padding-top: 48px;
-    border-right: 1px solid #ddd;
     background-color: #fff;
+    position: fixed;
+    height: 100%;
+    border-right: 1px solid #2222220D;
 }
 
 .menu__image-service {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin-bottom: 16px; 
+    padding: 8px;
+}
+
+.menu__image-service-target {
     width: 40px;
     height: 40px;
     display: block;
-    margin-bottom: 16px; 
+    margin-bottom: 16px;
 }
 
 .page__main-content {
     flex-grow: 1; 
     display: flex; 
     flex-direction: column;
-    margin-top: 53px;    
-    padding: 20px;
+    margin-top: 73px;   
     align-items: center;
 }
 
-.post-preview {
+.post-preview, .main-content__post {
     width: 474px; 
     margin-bottom: 20px; 
 }
@@ -46,7 +55,7 @@ body, html {
     display: block;
 }
 
-.post-preview__info {
+.post-preview__info, .post__info {
     display: flex; 
     justify-content: space-between; 
     align-items: center;
@@ -89,7 +98,7 @@ body, html {
     display: flex;
 }
 
-.content__image-counter {
+.image-container__image-counter {
     position: absolute; 
     top: 10px;
     right: 10px;
@@ -111,7 +120,7 @@ body, html {
 .actions__reaction, .actions__reaction-active {
     display: flex;
     align-items: center;
-    gap: 8px; 
+    gap: 2px; 
     padding: 6px 12px;
     border-radius: 8px;
     font-size: 15px;
@@ -119,7 +128,7 @@ body, html {
     border: 1px solid transparent;
 }
 
-.actions__reaction-number {
+.reaction__number {
     font: 15px/18px 'golos ui regular', sans-serif;
     margin: 0;
 }
@@ -134,9 +143,38 @@ body, html {
     background: rgba(239, 83, 83, 0.1);
 }
 
-.actions__image-reaction {
+.reaction__image {
     width: 16px;
     height: 16px;
+}
+
+.image-container__slider-right {
+    top: 221px;
+    left: 438px;
+    background: #FFFFFF99;
+}
+
+.image-container__slider-left {
+    top: 223.67px;
+    left: 16px;
+    background: #FFFFFF1A;
+}
+
+.image-container__slider-right, .image-container__slider-left {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    border: 0px;
+    border-radius: 999px;
+    position: absolute; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider__image {
+    width: 10px;
+    height: 10px;
 }
 
 .footer__text {

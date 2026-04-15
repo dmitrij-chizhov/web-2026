@@ -67,8 +67,6 @@ function formatRelativeTime($timestamp) {
 $stmt->close();
 $conn->close();
 ?>
-
-
 <?php if ($foundPost): ?>
 <!DOCTYPE html>
 <html>
@@ -82,41 +80,45 @@ $conn->close();
         <div class="page">
             <nav class="page__menu">
                 <a href="#" title="Home">
-                    <img src="../../images/home-target.png" class="menu__image-service" alt="Home" height="40" width="40">
+                    <img src="../../images/home-target.png" class="menu__image-service-target" alt="Home" height="40px" width="40px">
                 </a>
                 <a href="/profile" title="Profile">
-                    <img src="../../images/profile.png" class="menu__image-service" alt="Profile" height="40" width="40">
+                    <img src="../../images/profile.png" class="menu__image-service" alt="Profile" height="24px" width="24px">
                 </a>
                 <a href="#" title="Plus">
-                    <img src="../../images/plus.png" class="menu__image-service" alt="Plus" height="40" width="40">
+                    <img src="../../images/plus.png" class="menu__image-service" alt="Plus" height="24px" width="24px">
                 </a>              
             </nav>
             <div class="page__main-content">
-                <div class="post-preview">         
-                    <div class="post-preview__info">
+                <div class="main-content__post">         
+                    <div class="post__info">
                         <div class="info__user"> 
                             <?php if ($foundPost['avatar_url']): ?>
-                                <img src="<?= htmlspecialchars($foundPost['avatar_url']) ?>" class="user__avatar" alt="Avatar">
+                                <a href="/profile/index/<?= htmlspecialchars($foundPost['user_id']) ?>">
+                                    <img src="<?= htmlspecialchars($foundPost['avatar_url']) ?>" class="user__avatar" alt="Avatar" width="32px" height="32px">
+                                </a>
                             <?php endif; ?>
-                            <span class="user__author"><?= htmlspecialchars($foundPost['user_name']) ?></span>
+                            <a href="/profile/index/<?= htmlspecialchars($foundPost['user_id']) ?>"  class="user__author">
+                                <p class="user__author"><?= htmlspecialchars($foundPost['user_name']) ?></p>
+                            </a>
                         </div>
                         <?php if ($foundPost['user_id'] == 1): ?>
-                            <img src="../../images/edit.png" class="user__edit-icon" alt="Edit">
+                            <img src="../../images/edit.png" class="user__edit-icon" alt="Edit"  width="24px" height="24px">
                         <?php endif; ?>
                     </div>
-                    <div class="post-preview__content">
+                    <div class="post__content">
                         <?php if (!empty($foundPost['images'])): ?>
                             <div class="content__image-container">
                                 <?php foreach ($foundPost['images'] as $imageUrl): ?>
-                                    <img src="<?= htmlspecialchars($imageUrl) ?>" class="image-container__image" alt="Post content">
+                                    <img src="<?= htmlspecialchars($imageUrl) ?>" class="image-container__image" alt="Post content"  width="474px" height="474px">
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
                         <div class="content__footer"> 
                             <div class="footer__actions">
                                 <button class="actions__reaction">
-                                    <img src="../../images/like.png" class="actions__image-reaction" alt="like">
-                                    <p class="actions__reaction-number"><?= $foundPost['like_count'] ?></p>
+                                    <img src="../../images/like.png" class="reaction__image" alt="Like"  width="16px" height="16px">
+                                    <p class="reaction__number"><?= $foundPost['like_count'] ?></p>
                                 </button>
                             </div>
                             <?php if (!empty($foundPost['content'])): ?>
