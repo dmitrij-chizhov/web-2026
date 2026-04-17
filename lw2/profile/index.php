@@ -66,48 +66,52 @@ $stmtPostCount->close();
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html>
-<head>
-    <title><?= htmlspecialchars($foundUser['user_name']) ?> - Профиль</title>
-    <meta charset="UTF-8">
-    <link href="../home.css" rel="stylesheet">
-    <link href="../profile.css" rel="stylesheet">
-    <link href="../../font/font.css" rel="stylesheet">
-</head>
-<body>
-    <div class="page">
-        <nav class="page__menu">
-            <a href="/home" title="Home">
-                <img src="../../images/home.png" class="menu__image-service" alt="Home" height="40" width="40">
-            </a>
-            <a href="#" title="Profile">
-                <img src="../../images/profile-target.png" class="menu__image-service" alt="Profile" height="40" width="40">
-            </a>
-            <a href="#" title="Plus">
-                <img src="../../images/plus.png" class="menu__image-service" alt="Plus" height="40" width="40">
-            </a>
-        </nav>
-
-        <div class="page__main-content">
-            <div class="main-content__user">
-                <div class="user__info">
-                    <?php if ($foundUser['avatar_url']): ?>
-                        <img src="<?= htmlspecialchars($foundUser['avatar_url']) ?>" class="info__image-avatar" alt="Аватар" height="123" width="123">
-                    <?php endif; ?>
-                    <h1 class="info__text-avatar"><?= htmlspecialchars($foundUser['user_name']) ?></h1>
+    <head>
+        <title><?= htmlspecialchars($foundUser['user_name']) ?> - Профиль</title>
+        <meta charset="UTF-8">
+        <link href="../profile.css" rel="stylesheet">
+        <link href="../../font/font.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="page">
+            <nav class="page__menu">
+                <a href="/home" title="Home">
+                    <img src="../../images/home.png" class="menu__image-service" alt="Home" height="24px" width="24px">
+                </a>
+                <a href="#" title="Profile">
+                    <img src="../../images/profile-target.png" class="menu__image-service-target" alt="Profile" height="40px" width="40px">
+                </a>
+                <a href="#" title="Plus">
+                    <img src="../../images/plus.png" class="menu__image-service" alt="Plus" height="24px" width="24px">
+                </a>
+            </nav>
+            <div class="page__main-content">
+                <div class="main-content__profile">
+                    <div class="profile__info">
+                        <?php if ($foundUser['avatar_url']): ?>
+                            <img src="<?= htmlspecialchars($foundUser['avatar_url']) ?>" class="info__image-avatar" alt="Аватар" height="123px" width="123px">
+                        <?php endif; ?>
+                        <h1 class="info__text-name"><?= htmlspecialchars($foundUser['user_name']) ?></h1>
+                    </div>
+                    <div class="profile__about">
                     <?php if ($foundUser['about_yourself']): ?>
-                        <p class="info__text"><?= htmlspecialchars($foundUser['about_yourself']) ?></p>
+                        <p ><?= htmlspecialchars($foundUser['about_yourself']) ?></p>
                     <?php endif; ?>
-                    <p class="info__number-of-posts">
-                        <img src="../../images/posts.png" class="info__image-post" alt="Posts" height="16" width="16">
-                        <?= htmlspecialchars($postCount) ?> поста
-                    </p>
-                    <div class="user__content">
+                    </div>
+                    <div class="profile__statistic">
+                        <p class="statistic__text">
+                            <img src="../../images/posts.png" class="info__image-post" alt="Posts" height="16px" width="16px">
+                            <?= htmlspecialchars($postCount) ?> поста
+                        </p>
+                    </div>
+                    <div class="profile__content">
                         <?php if (!empty($userAllImages)): ?>
                             <?php foreach ($userAllImages as $image): ?>
-                                <img src="<?= htmlspecialchars($image['image_url']) ?>" class="photo-item__image" alt="Фото из поста" width="322px" height="322px">                                  
+                                <div class="content__post-item">
+                                    <img src="<?= htmlspecialchars($image['image_url']) ?>" class="content__image-photo" alt="Фото из поста" width="322px" height="322px">
+                                </div>                                  
                             <?php endforeach; ?>
                         <?php else: ?>
                             <p>У этого пользователя пока нет фотографий.</p>
@@ -116,6 +120,5 @@ $conn->close();
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html> 
