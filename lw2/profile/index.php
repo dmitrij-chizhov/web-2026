@@ -101,10 +101,8 @@ $conn->close();
                     <?php endif; ?>
                     </div>
                     <div class="profile__statistic">
-                        <p class="statistic__text">
-                            <img src="../../images/posts.png" class="info__image-post" alt="Posts" height="16px" width="16px">
-                            <?= htmlspecialchars($postCount) ?> поста
-                        </p>
+                        <img src="../../images/posts.png" class="info__image-post" alt="Posts" height="18px" width="18px">
+                        <p class="statistic__text"> <?= htmlspecialchars($postCount) ?> поста  </p>
                     </div>
                     <div class="profile__content">
                         <?php if (!empty($userAllImages)): ?>

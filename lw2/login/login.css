@@ -25,13 +25,14 @@ body, html {
     position: relative;
     z-index: 1;
     margin-bottom: -75px; 
-    margin-left: -90px; 
+    margin-top: 0px; 
 }
 
 .title__image {
     display: block;
     width: 462px;
     height: 501px;
+    padding-left: 90px;
 }
 
 .page__login {

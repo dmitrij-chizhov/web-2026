@@ -42,25 +42,20 @@ body, html {
 }
 
 .main-content__profile {
-    width: 972px;
     display: grid;
     align-content: start; 
 }
 
 .profile__info {
-    width: 361px;
-    height: 175px;
     display: grid;
     grid-template-rows: 143px 32px; 
     align-items: center; 
-    margin: auto;
 }
 
 .info__image-avatar {
     width: 123px;
     height: 123px;
     border-radius: 16px;
-    display: block;
     margin: auto;
 }
 
@@ -77,8 +72,8 @@ body, html {
 }
 
 .info__image-post {
-    width: 16x;
-    height: 16px;
+    width: 18x;
+    height: 18px;
 }
 
 .profile__statistic {
@@ -95,7 +90,6 @@ body, html {
 }
 
 .profile__content {
-    width: 972px;
     display: grid;
     grid-template-columns: repeat(3, 322px);
     gap: 3px; 

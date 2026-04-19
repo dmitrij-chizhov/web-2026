@@ -16,7 +16,7 @@ CREATE TABLE posts (
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
+    
 CREATE TABLE post_images (
     id INT NOT NULL AUTO_INCREMENT,
     post_id INT NOT NULL,
