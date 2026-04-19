@@ -1,6 +1,8 @@
+const minLenghtOfPassword = 4;
+
 function generatePassword(length) {
-    if (length < 8) {
-        console.log("Длина пароля должна быть не менее 8 символов для обеспечения безопасности.");
+    if (length < minLenghtOfPassword) {
+        console.log('Длина пароля должна быть не менее' ,minLenghtOfPassword, 'символов для обеспечения безопасности.');
         return;
     }
 
