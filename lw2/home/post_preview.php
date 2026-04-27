@@ -18,7 +18,7 @@
         <?php if ($post['first_image_url']): ?>
             <div class="content__image-container">
                 <a class="image-container__link" title="<?= $post['title'] ?>" href="post/<?= $post['id'] ?>"> 
-                    <img src="<?= ($post['first_image_url']) ?>" class="image-container__image" alt="Post preview" width="474px" height="474px">
+                    <img src="../<?= htmlspecialchars($post['first_image_url']) ?>" class="image-container__image" alt="Post preview" width="474px" height="474px">
                 </a>
                 <?php if ($post['photo_count'] > 1): ?>
                     <span class="image-container__image-counter">1/<?= $post['photo_count'] ?></span>

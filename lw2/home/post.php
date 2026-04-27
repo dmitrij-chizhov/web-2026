@@ -9,10 +9,16 @@ if (!$postId) {
     die("Ошибка: ID поста не указан.");
 }
 
-$sql = "SELECT p.*, u.user_name, u.avatar_url
-        FROM posts AS p
-        JOIN users AS u ON p.user_id = u.id
-        WHERE p.id = ?";
+$sql = "SELECT 
+            p.*, 
+            u.user_name, 
+            u.avatar_url
+        FROM 
+            posts AS p
+        JOIN 
+            users AS u ON p.user_id = u.id
+        WHERE 
+            p.id = ?";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $postId);
@@ -22,7 +28,14 @@ $foundPost = $result->fetch_assoc();
 
 if ($foundPost) {
     $foundPost['images'] = [];
-    $sql_images = "SELECT image_url FROM post_images WHERE post_id = ? ORDER BY display_order ASC";
+    $sql_images = "SELECT 
+                       image_url 
+                   FROM 
+                       post_images 
+                   WHERE 
+                       post_id = ? 
+                   ORDER BY 
+                       display_order ASC";
     
     $stmt_images = $conn->prepare($sql_images);
     $stmt_images->bind_param('i', $postId);
@@ -95,7 +108,7 @@ $conn->close();
                         <div class="info__user"> 
                             <?php if ($foundPost['avatar_url']): ?>
                                 <a href="/profile/index/<?= htmlspecialchars($foundPost['user_id']) ?>">
-                                    <img src="<?= htmlspecialchars($foundPost['avatar_url']) ?>" class="user__avatar" alt="Avatar" width="32px" height="32px">
+                                    <img src="../<?= htmlspecialchars($foundPost['avatar_url']) ?>" class="user__avatar" alt="Avatar" width="32px" height="32px">
                                 </a>
                             <?php endif; ?>
                             <a href="/profile/index/<?= htmlspecialchars($foundPost['user_id']) ?>"  class="user__author">
@@ -110,7 +123,7 @@ $conn->close();
                         <?php if (!empty($foundPost['images'])): ?>
                             <div class="content__image-container">
                                 <?php foreach ($foundPost['images'] as $imageUrl): ?>
-                                    <img src="<?= htmlspecialchars($imageUrl) ?>" class="image-container__image" alt="Post content"  width="474px" height="474px">
+                                    <img src="../<?= htmlspecialchars($imageUrl) ?>" class="image-container__image" alt="Post content"  width="474px" height="474px">
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>

@@ -91,7 +91,7 @@ $conn->close();
                 <div class="main-content__profile">
                     <div class="profile__info">
                         <?php if ($foundUser['avatar_url']): ?>
-                            <img src="<?= htmlspecialchars($foundUser['avatar_url']) ?>" class="info__image-avatar" alt="Аватар" height="123px" width="123px">
+                            <img src="../<?= htmlspecialchars($foundUser['avatar_url']) ?>" class="info__image-avatar" alt="Аватар" height="123px" width="123px">
                         <?php endif; ?>
                         <h1 class="info__text-name"><?= htmlspecialchars($foundUser['user_name']) ?></h1>
                     </div>
@@ -108,7 +108,7 @@ $conn->close();
                         <?php if (!empty($userAllImages)): ?>
                             <?php foreach ($userAllImages as $image): ?>
                                 <div class="content__post-item">
-                                    <img src="<?= htmlspecialchars($image['image_url']) ?>" class="content__image-photo" alt="Фото из поста" width="322px" height="322px">
+                                    <img src="../<?= htmlspecialchars($image['image_url']) ?>" class="content__image-photo" alt="Фото из поста" width="322px" height="322px">
                                 </div>                                  
                             <?php endforeach; ?>
                         <?php else: ?>

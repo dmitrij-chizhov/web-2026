@@ -5,16 +5,21 @@ error_reporting(E_ALL);
 require_once '../data/db.php';
 
 header('Content-Type: application/json');
-define('UPLOAD_DIR', 'images/');
+define('UPLOAD_DIR', '../images/');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); 
     echo json_encode(['status' => 'error', 'message' => 'Метод не разрешен. Используйте POST.']);
     exit;
 }
-if (!is_dir(UPLOAD_DIR) || !is_writable(UPLOAD_DIR)) {
+if (!is_dir(UPLOAD_DIR)) {
     http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Директория для загрузок не существует или не доступна для записи.']);
+    echo json_encode(['status' => 'error', 'message' => 'Директория для загрузок не существует.']);
+    exit;
+}
+if (!is_writable(UPLOAD_DIR)) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Директория для загрузок не доступна для записи.']);
     exit;
 }
 
