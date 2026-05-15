@@ -93,13 +93,13 @@ $conn->close();
         <div class="page">
             <nav class="page__menu">
                 <a href="#" title="Home">
-                    <img src="../../images/home-target.png" class="menu__image-service-target" alt="Home" height="40px" width="40px">
+                    <img src="../../images/home-target.png" class="menu__image-service-target" alt="Home">
                 </a>
                 <a href="/profile" title="Profile">
-                    <img src="../../images/profile.png" class="menu__image-service" alt="Profile" height="24px" width="24px">
+                    <img src="../../images/profile.png" class="menu__image-service" alt="Profile">
                 </a>
                 <a href="#" title="Plus">
-                    <img src="../../images/plus.png" class="menu__image-service" alt="Plus" height="24px" width="24px">
+                    <img src="../../images/plus.png" class="menu__image-service" alt="Plus">
                 </a>              
             </nav>
             <div class="page__main-content">
@@ -108,7 +108,7 @@ $conn->close();
                         <div class="info__user"> 
                             <?php if ($foundPost['avatar_url']): ?>
                                 <a href="/profile/index/<?= htmlspecialchars($foundPost['user_id']) ?>">
-                                    <img src="../<?= htmlspecialchars($foundPost['avatar_url']) ?>" class="user__avatar" alt="Avatar" width="32px" height="32px">
+                                    <img src="../<?= htmlspecialchars($foundPost['avatar_url']) ?>" class="user__avatar" alt="Avatar">
                                 </a>
                             <?php endif; ?>
                             <a href="/profile/index/<?= htmlspecialchars($foundPost['user_id']) ?>"  class="user__author">
@@ -116,21 +116,21 @@ $conn->close();
                             </a>
                         </div>
                         <?php if ($foundPost['user_id'] == 1): ?>
-                            <img src="../../images/edit.png" class="user__edit-icon" alt="Edit"  width="24px" height="24px">
+                            <img src="../../images/edit.png" class="user__edit-icon" alt="Edit">
                         <?php endif; ?>
                     </div>
                     <div class="post__content">
                         <?php if (!empty($foundPost['images'])): ?>
                             <div class="content__image-container">
                                 <?php foreach ($foundPost['images'] as $imageUrl): ?>
-                                    <img src="../<?= htmlspecialchars($imageUrl) ?>" class="image-container__image" alt="Post content"  width="474px" height="474px">
+                                    <img src="../<?= htmlspecialchars($imageUrl) ?>" class="image-container__image" alt="Post content">
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
                         <div class="content__footer"> 
                             <div class="footer__actions">
                                 <button class="actions__reaction">
-                                    <img src="../../images/like.png" class="reaction__image" alt="Like"  width="16px" height="16px">
+                                    <img src="../../images/like.png" class="reaction__image" alt="Like">
                                     <p class="reaction__number"><?= $foundPost['like_count'] ?></p>
                                 </button>
                             </div>
