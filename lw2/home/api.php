@@ -33,16 +33,39 @@ try {
     if (!$title || !$user_id) {
         throw new Exception('Некорректные данные: title и user_id обязательны.', 400);
     }
+    
+    $sql_check = "SELECT id FROM users WHERE id = ?";
+    $stmt_check = $conn->prepare($sql_check);
+    if (!$stmt_check) {
+        throw new Exception("Ошибка подготовки запроса (users): " . $conn->error);
+    }
+
+    $stmt_check->bind_param('i', $user_id);
+    if (!$stmt_check->execute()) {
+        throw new Exception("Ошибка выполнения запроса (users): " . $stmt_check->error);
+    }
+
+    $result = $stmt_check->get_result();
+    if ($result->num_rows === 0) {
+        throw new Exception("Пользователь не существует.", 404);
+    }
+    $stmt_check->close();
 
     $sql_post = "INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)";
     $stmt_post = $conn->prepare($sql_post);
-    if (!$stmt_post) throw new Exception("Ошибка подготовки запроса (posts): " . $conn->error);
+    if (!$stmt_post) {
+        throw new Exception("Ошибка подготовки запроса (posts): " . $conn->error);
+    }
     
     $stmt_post->bind_param('iss', $user_id, $title, $content);
-    if (!$stmt_post->execute()) throw new Exception("Ошибка выполнения запроса (posts): " . $stmt_post->error);
+    if (!$stmt_post->execute()) {
+        throw new Exception("Ошибка выполнения запроса (posts): " . $stmt_post->error);
+    }
 
     $new_post_id = $conn->insert_id;
-    if (!$new_post_id) throw new Exception("Не удалось получить ID нового поста.");
+    if (!$new_post_id) {
+        throw new Exception("Не удалось получить ID нового поста.");
+    }
     
     $stmt_post->close();
 
@@ -52,7 +75,9 @@ try {
         
         $sql_images = "INSERT INTO post_images (post_id, image_url, display_order) VALUES (?, ?, ?)";
         $stmt_images = $conn->prepare($sql_images);
-        if (!$stmt_images) throw new Exception("Ошибка подготовки запроса (post_images): " . $conn->error);
+        if (!$stmt_images) {
+            throw new Exception("Ошибка подготовки запроса (post_images): " . $conn->error);
+        }
 
         $image_count = count($_FILES['images']['name']);
 
@@ -67,7 +92,9 @@ try {
                     $display_order = $i; 
                     
                     $stmt_images->bind_param('isi', $new_post_id, $destination, $display_order);
-                    if (!$stmt_images->execute()) throw new Exception("Ошибка сохранения картинки в БД: " . $stmt_images->error);
+                    if (!$stmt_images->execute()) {
+                        throw new Exception("Ошибка сохранения картинки в БД: " . $stmt_images->error);
+                    }
 
                     $uploaded_images[] = $destination; 
                 } else {
