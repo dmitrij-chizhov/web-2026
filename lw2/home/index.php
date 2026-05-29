@@ -5,14 +5,14 @@ $sql = "
     SELECT
         p.id,
         p.title,
-        p.content,        
-        p.created_time,  
+        p.content,
+        p.created_time,
         p.like_count,
-        p.user_id,        
+        p.user_id,
         u.user_name,
         u.avatar_url,
         COUNT(pi.id) AS photo_count,
-        (SELECT image_url FROM post_images WHERE post_id = p.id ORDER BY display_order ASC LIMIT 1) AS first_image_url
+        JSON_ARRAYAGG(pi.image_url) AS all_images
     FROM
         posts AS p
     JOIN
@@ -28,40 +28,55 @@ $sql = "
 $result = $conn->query($sql);
 $posts = [];
 if ($result) {
-    $posts = $result->fetch_all(MYSQLI_ASSOC);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    
+    foreach ($rows as $row) {
+        $decoded_images = json_decode($row['all_images'] ?? '[]');
+        $row['all_images'] = array_filter($decoded_images);
+        
+        $posts[] = $row;
+    }
 }
 
+const SECONDS_IN_MINUTE = 60;
+const SECONDS_IN_HOUR = 3600;
+const SECONDS_IN_DAY = 86400;
+const SECONDS_IN_WEEK = 604800;
+const SECONDS_IN_MONTH = 2592000;
+const SECONDS_IN_YEAR = 31536000;
+const TIMEZONE_OFFSET = 10800;
+
 function formatRelativeTime($timestamp) {
-    $now = time() + 10800; 
+    $now = time() + TIMEZONE_OFFSET; 
     $postTime = strtotime($timestamp); 
     $diff = $now - $postTime; 
 
-    if ($diff < 60) {
+    if ($diff < SECONDS_IN_MINUTE) {
         return $diff . ' секунд назад';
-    } elseif ($diff < 3600) { 
-        $minutes = floor($diff / 60);
+    } elseif ($diff < SECONDS_IN_HOUR) { 
+        $minutes = floor($diff / SECONDS_IN_MINUTE);
         return $minutes . ' минут назад';
-    } elseif ($diff < 86400) { 
-        $hours = floor($diff / 3600);
+    } elseif ($diff < SECONDS_IN_DAY) { 
+        $hours = floor($diff / SECONDS_IN_HOUR);
         return $hours . ' часов назад';
-    } elseif ($diff < 604800) { 
-        $days = floor($diff / 86400);
+    } elseif ($diff < SECONDS_IN_WEEK) { 
+        $days = floor($diff / SECONDS_IN_DAY);
         return $days . ' дней назад';
-    } elseif ($diff < 2592000) { 
-        $weeks = floor($diff / 604800);
+    } elseif ($diff < SECONDS_IN_MONTH) { 
+        $weeks = floor($diff / SECONDS_IN_WEEK);
         return $weeks . ' недель назад';
-    } elseif ($diff < 31536000) { 
-        $months = floor($diff / 2592000);
+    } elseif ($diff < SECONDS_IN_YEAR) { 
+        $months = floor($diff / SECONDS_IN_MONTH);
         return $months . ' месяцев назад';
     } else {
-        $years = floor($diff / 31536000);
+        $years = floor($diff / SECONDS_IN_YEAR);
         return $years . ' лет назад';
     }
 }
 
 $conn->close();
 
-const MAX_TEXT_LENGTH = 135
+const MAX_TEXT_LENGTH = 135;
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,27 +85,43 @@ const MAX_TEXT_LENGTH = 135
         <meta charset="UTF-8">
         <link href="home.css" rel="stylesheet">
         <link href="../font/font.css" rel="stylesheet">
+        <script src="script.js"></script>
     </head>
     <body>
-        <div class="page">
-            <nav class="page__menu">
-                <a href="#" title="Home">
-                    <img src="../images/home-target.png" class="menu__image-service-target" alt="Home" height="40px" width="40px">
-                </a>
-                <a href="/profile/index/1" title="Profile">
-                    <img src="../images/profile.png" class="menu__image-service" alt="Profile" height="24px" width="24px">
-                </a>
-                <a href="#" title="Plus">
-                    <img src="../images/plus.png" class="menu__image-service" alt="Plus" height="24px" width="24px">
-                </a>              
-            </nav>
-            <div class="page__main-content">
-                <?php 
-                    foreach ($posts as $post) {
-                        include 'post_preview.php';
-                    }
-                ?>
+        <nav class="menu">
+            <a href="#" title="Home">
+                <img src="../images/home-target.png" class="menu__image-service_target" alt="Home">
+            </a>
+            <a href="/profile/index/1" title="Profile">
+                <img src="../images/profile.png" class="menu__image-service" alt="Profile">
+            </a>
+            <a href="#" title="Plus">
+                <img src="../images/plus.png" class="menu__image-service" alt="Plus">
+            </a>              
+        </nav>
+        <div class="main-content">
+            <?php 
+                foreach ($posts as $post) {
+                    include 'post_preview.php';
+                }
+            ?>
+        </div>
+        <div id="imageModal" class="modal">
+            <div class="modal__content">
+                <button class="modal__close" id="modalClose">
+                    <img src="../images/cross.png" class="cross__image">
+                </button>
+                <img id="modalImage" src="" class="modal__image">
+                
+                <button class="modal__prev" id="modalPrev">
+                    <img src="../images/arrow-left.png" class="slider__image">
+                </button>
+                <button class="modal__next" id="modalNext">
+                    <img src="../images/arrow-right.png" class="slider__image">
+                </button>
+                
+                <div class="modal__counter" id="modalCounter">1 из 1</div>
             </div>
-        </div>        
+        </div>
     </body>
 </html>

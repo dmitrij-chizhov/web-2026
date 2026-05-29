@@ -3,22 +3,17 @@ body, html {
     padding: 0;
     font-family: 'Golos UI Regular', sans-serif;
     background-color: #fff; 
-}
-
-.page {
-    display: flex; 
-    flex-direction: row; 
     min-height: 100%; 
 }
 
-.page__menu {
-    flex-shrink: 0;
+.menu {
     padding: 16px;
-    padding-top: 48px;
     background-color: #fff;
     position: fixed;
     height: 100%;
     border-right: 1px solid #2222220D;
+    top: 0px;
+    margin-top: 40px;
 }
 
 .menu__image-service {
@@ -29,14 +24,14 @@ body, html {
     padding: 8px;
 }
 
-.menu__image-service-target {
+.menu__image-service_target {
     width: 40px;
     height: 40px;
     display: block;
     margin-bottom: 16px;
 }
 
-.page__main-content {
+.main-content {
     flex-grow: 1; 
     display: flex; 
     flex-direction: column;
@@ -44,7 +39,7 @@ body, html {
     align-items: center;
 }
 
-.post-preview, .main-content__post {
+.post {
     width: 474px; 
     margin-bottom: 20px; 
 }
@@ -55,12 +50,13 @@ body, html {
     display: block;
 }
 
-.post-preview__info, .post__info {
+.post__user-info {
     display: flex; 
-    justify-content: space-between; 
+    justify-content: flex-start; 
     align-items: center;
     padding-top: 16px;
     padding-bottom: 16px;
+    gap: 10px;
 }
 
 .info__user {
@@ -69,33 +65,37 @@ body, html {
     gap: 10px; 
 }
 
-.user__avatar {
+.user-info__avatar {
     width: 32px;
     height: 32px;
     border-radius: 10%;
 }
 
-.user__author {
+.user-info__author {
     font: 500 14px 'Golos UI Medium', sans-serif;
     color: #000;
     text-decoration: none;
 }
 
-.user__edit-icon {
+.user-info__edit-icon {
     width: 24px;
     height: 24px;
     opacity: 0.7;
+    margin-left: auto; 
 }
 
-.content__image-container {
-    position: relative; 
+.post__image-container {
     width: 100%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    overflow: hidden;
 }
 
 .image-container__image {
-    width: 474px;
-    height: 474px;
-    display: flex;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .image-container__image-counter {
@@ -109,7 +109,7 @@ body, html {
     font-size: 14px;
 }
 
-.content__footer {
+.post__content {
     font: 15px/18px 'golos ui regular', sans-serif;
     display: flex;
     flex-direction: column; 
@@ -126,6 +126,7 @@ body, html {
     font-size: 15px;
     margin-bottom: 16px;
     border: 1px solid transparent;
+    cursor:pointer;
 }
 
 .reaction__number {
@@ -157,7 +158,7 @@ body, html {
 .image-container__slider-left {
     top: 223.67px;
     left: 16px;
-    background: #FFFFFF1A;
+    background: #FFFFFF99;
 }
 
 .image-container__slider-right, .image-container__slider-left {
@@ -170,6 +171,7 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor:pointer;
 }
 
 .slider__image {
@@ -177,7 +179,7 @@ body, html {
     height: 10px;
 }
 
-.footer__text {
+.content__text-container {
     margin: 0;
     padding-bottom: 8px;
     font: 15px/18px 'golos ui regular', sans-serif;
@@ -185,11 +187,86 @@ body, html {
 }
 
 .text__more-link {
+    display: block;
     color: #808080;
     text-decoration: none;
+    cursor:pointer;
 }
 
-.footer__time {
+.content__time {
     font-size: 14px;
     color: #808080;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(144, 144, 144); 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__content {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal__image {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    user-select: none;
+}
+
+.modal__close {
+    position: absolute;
+    top: -40px; 
+    right: 0px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+    margin: 0px;
+}
+
+.cross__image {
+    width: 24px;
+    height: 24px;
+}
+
+.modal__prev, .modal__next {
+    top: 45%;
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    border: 0px;
+    border-radius: 999px;
+    position: absolute; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.modal__prev { 
+    left: 16px; 
+}
+.modal__next { 
+    right: 16px; 
+}
+
+.modal__counter {
+    color: white;
+    margin-top: 15px;
+    font: 500 15px/18px 'Golos UI Medium', sans-serif;
+    letter-spacing: -0.15px;
 }

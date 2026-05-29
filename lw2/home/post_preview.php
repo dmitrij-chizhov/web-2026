@@ -1,64 +1,62 @@
-<div class="post-preview">         
-    <div class="post-preview__info">
-        <div class="info__user"> 
+<div class="post">         
+    <div class="post__user-info">
             <?php if ($post['avatar_url']): ?>
                 <a href="/profile/index/<?= htmlspecialchars($post['user_id']) ?>">
-                    <img src="<?= htmlspecialchars($post['avatar_url']) ?>" class="user__avatar" alt="Avatar" width="32px" height="32px">
+                    <img src="<?= htmlspecialchars($post['avatar_url']) ?>" class="user-info__avatar" alt="Avatar">
                 </a>
             <?php endif; ?>
-            <a href="/profile/index/<?= htmlspecialchars($post['user_id']) ?>"  class="user__author">
+            <a href="/profile/index/<?= htmlspecialchars($post['user_id']) ?>"  class="user-info__author">
                 <p><?= htmlspecialchars($post['user_name']) ?></p>
             </a>
-        </div>
-        <?php if ($post['user_id'] == 1): ?>
-            <img src="../../images/edit.png" class="user__edit-icon" alt="Edit" width="24px" height="24px">
-        <?php endif; ?>
+            <?php if ($post['user_id'] == 1): ?>
+                <img src="../../images/edit.png" class="user-info__edit-icon" alt="Edit">
+            <?php endif; ?>
     </div>
-    <div class="post-preview__content">
-        <?php if ($post['first_image_url']): ?>
-            <div class="content__image-container">
-                <a class="image-container__link" title="<?= $post['title'] ?>" href="post/<?= $post['id'] ?>"> 
-                    <img src="../<?= htmlspecialchars($post['first_image_url']) ?>" class="image-container__image" alt="Post preview" width="474px" height="474px">
-                </a>
-                <?php if ($post['photo_count'] > 1): ?>
-                    <span class="image-container__image-counter">1/<?= $post['photo_count'] ?></span>
-                    <button class="image-container__slider-left">
-                        <img src="../images/arrow-left.png" class="slider__image" width="20px" height="20px">
-                    </button>
-                    <button class="image-container__slider-right">
-                        <img src="../images/arrow-right.png" class="slider__image" width="20px" height="20px">
-                    </button>
+    <?php if (!empty($post['all_images'])): ?>
+        <div class="post__image-container" 
+            data-images='<?= json_encode($post['all_images']) ?>' 
+            data-current="0">
+    
+            <img src="../<?= htmlspecialchars($post['all_images'][0]) ?>" class="image-container__image js-slider-img" alt="Post preview">        
+
+            <?php if ($post['photo_count'] > 1): ?>
+                <span class="image-container__image-counter js-counter">1/<?= $post['photo_count'] ?></span>
+                
+                <button class="image-container__slider-left js-slider-prev">
+                    <img src="../images/arrow-left.png" class="slider__image">
+                </button>
+                <button class="image-container__slider-right js-slider-next">
+                    <img src="../images/arrow-right.png" class="slider__image">
+                </button>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+    <div class="post__content"> 
+        <div class="content__actions">
+            <button class="actions__reaction">
+                <img src="../images/like.png" class="reaction__image" alt="Like">
+                <p class="reaction__number"><?= $post['like_count'] ?></p>
+            </button>
+        </div>
+        <?php if ($post['content']): 
+            $content = htmlspecialchars($post['content']);
+            $isLong = mb_strlen($content, 'UTF-8') > MAX_TEXT_LENGTH;
+        ?>
+            <div class="content__text-container js-text-container">
+                <?php if ($isLong): ?>
+                    <p class="text-container__text js-text-short">
+                        <?= mb_substr($content, 0, MAX_TEXT_LENGTH, 'UTF-8') ?>...
+                        <span class="text__more-link js-toggle-text">ещё</span>
+                    </p>
+                    <p class="text-container__text js-text-full" style="display: none;">
+                        <?= $content ?>
+                        <span class="text__more-link js-toggle-text">свернуть</span>
+                    </p>
+                <?php else: ?>
+                    <p class="text-container__text"><?= $content ?></p>
                 <?php endif; ?>
             </div>
-        <?php endif; ?> 
-        <div class="content__footer"> 
-            <div class="footer__actions">
-                <button class="actions__reaction">
-                    <img src="../images/like.png" class="reaction__image" alt="Like" width="16px" height="16px">
-                    <p class="reaction__number"><?= $post['like_count'] ?></p>
-                </button>
-            </div>
-            <?php if ($post['content']) {
-                $truncatedText = htmlspecialchars($post['content']); 
-                $originalLength = mb_strlen($truncatedText, 'UTF-8'); 
-                if ($originalLength > MAX_TEXT_LENGTH) {
-                    $truncatedText = mb_substr($truncatedText, 0, MAX_TEXT_LENGTH, 'UTF-8') . '...';
-                    $moreInfo = true;
-                } else {
-                    $moreInfo = false;
-                }
-                ?>
-                <p class="footer__text">
-                    <?= $truncatedText ?>
-                    <?php if ($moreInfo): ?>
-                        <br>
-                        <a href="post/<?= htmlspecialchars($post['id']) ?>" class="text__more-link">ещё</a>
-                    <?php endif; ?>
-                </p>
-                <?php
-            }
-            ?>
-            <span class="footer__time"><?= formatRelativeTime($post['created_time']) ?></span>
-        </div>
+        <?php endif; ?>
+        <span class="content__time"><?= formatRelativeTime($post['created_time']) ?></span>
     </div>
 </div>

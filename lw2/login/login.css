@@ -16,14 +16,18 @@ body, html {
 }
 
 .page__title {
-    width: auto;
+    width: 552px;       
+    height: 501px;     
+    position: relative; 
 }
 
 .title__text {
     letter-spacing: -1.5px;
-    font: 700 140px/30px 'Golos ui bold', sans-serif;
-    position: relative;
-    z-index: 1;
+    font: 700 140px/180px 'Golos ui bold', sans-serif; 
+    position: absolute; 
+    top: -100px;         
+    left: 0;            
+    z-index: 2;         
     margin: 0px; 
 }
 
@@ -31,7 +35,11 @@ body, html {
     display: block;
     width: 462px;
     height: 501px;
-    padding-left: 90px;
+    padding-left: 90px;    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;         
 }
 
 .page__login {
@@ -43,13 +51,14 @@ body, html {
     letter-spacing: -0.15px;
     font: 15px/18px 'golos ui regular', sans-serif;
     margin-bottom: 5px;
+    color: #222222;
 }
 
 .login__text-help {
     letter-spacing: -0.08px;
     color: #808080;
     font: 13px/16px 'golos ui regular', sans-serif;
-    margin: 5px 0 16px;
+    margin: 0px 0px 16px;
 }
 
 .login__input-wrapper {
