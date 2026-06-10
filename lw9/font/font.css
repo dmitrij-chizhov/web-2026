@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Golos UI Medium';
+    src: url('./Golos UI/golos_ui_medium.woff2') format('woff2'),
+         url('./Golos UI/golos_ui_medium.woff') format('woff');
+    font-weight: normal;
+    font-style: medium;
+}
+
+@font-face {
+    font-family: 'Golos UI Bold';
+    src: url('./Golos UI/golos_ui_bold.woff2') format('woff2'),
+         url('./Golos UI/golos_ui_bold.woff') format('woff');
+    font-weight: normal;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Golos UI Regular';
+    src: url('./Golos UI/golos_ui_regular.woff2') format('woff2'),
+         url('./Golos UI/golos_ui_regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,0 +1,128 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.getElementById('fileInput');
+    const buttonUploadTrigger = document.getElementById('buttonUploadTrigger');
+    const addButton = document.getElementById('addButton');
+    const placeholderBlock = document.getElementById('placeholderBlock');
+    const postCaption = document.getElementById('postCaption');
+    const submitButton = document.getElementById('submitButton');
+    const previewContainer = document.querySelector('.js-preview-container');
+    const image = previewContainer.querySelector('.js-image');
+    const counterElement = previewContainer.querySelector('.js-counter');
+    const buttonNext = previewContainer.querySelector('.js-slider-next');
+    const buttonPrev = previewContainer.querySelector('.js-slider-prev');
+
+    let uploadedFiles = [];
+    let objectUrls = [];
+
+    buttonUploadTrigger.addEventListener('click', () => fileInput.click());
+    addButton.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (files.length > 0) {
+            files.forEach(file => {
+                objectUrls.push(URL.createObjectURL(file));
+            });
+            
+            uploadedFiles = uploadedFiles.concat(files);
+            
+            const newIndex = uploadedFiles.length - files.length;
+            previewContainer.dataset.current = newIndex;
+            
+            updateSlider();
+            checkValidation();
+        }
+        fileInput.value = '';
+    });
+
+    const updateSlider = () => {
+        if (uploadedFiles.length === 0) {
+            placeholderBlock.style.display = 'flex';
+            image.style.display = 'none';
+            buttonPrev.style.display = 'none';
+            buttonNext.style.display = 'none';
+            counterElement.style.display = 'none';
+            return;
+        }
+
+        placeholderBlock.style.display = 'none';
+        image.style.display = 'block';
+
+        const currentIndex = parseInt(previewContainer.dataset.current, 10) || 0;
+        image.src = objectUrls[currentIndex];
+
+        if (uploadedFiles.length > 1) {
+            buttonPrev.style.display = 'flex';
+            buttonNext.style.display = 'flex';
+            counterElement.style.display = 'block';
+            counterElement.textContent = `${currentIndex + 1}/${uploadedFiles.length}`;
+        } else {
+            buttonPrev.style.display = 'none';
+            buttonNext.style.display = 'none';
+            counterElement.style.display = 'none';
+        }
+    };
+
+    const next = () => {
+        if (uploadedFiles.length === 0) {
+            return;
+        }
+        let currentIndex = parseInt(previewContainer.dataset.current, 10) || 0;
+        let nextIndex = (currentIndex + 1) % uploadedFiles.length;
+        previewContainer.dataset.current = nextIndex;
+        updateSlider();
+    };
+
+    const prev = () => {
+        if (uploadedFiles.length === 0) {
+            return;
+        }
+        let currentIndex = parseInt(previewContainer.dataset.current, 10) || 0;
+        let prevIndex = (currentIndex - 1 + uploadedFiles.length) % uploadedFiles.length;
+        previewContainer.dataset.current = prevIndex;
+        updateSlider();
+    };
+
+    buttonNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        next();
+    });
+
+    buttonPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prev();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            next();
+        } else if (e.key === 'ArrowLeft') {
+            prev();
+        }
+    });
+
+    function checkValidation() {
+        const hasPhotos = uploadedFiles.length > 0;
+        const hasText = postCaption.value.trim().length > 0;
+        submitButton.disabled = !(hasPhotos && hasText);
+    }
+
+    postCaption.addEventListener('input', checkValidation);
+
+    submitButton.addEventListener('click', () => {
+        const postData = {
+            caption: postCaption.value.trim(),
+            photosCount: uploadedFiles.length,
+            filesInfo: uploadedFiles.map(file => ({
+                name: file.name,
+                size: `${(file.size / 1024).toFixed(2)} KB`,
+                type: file.type
+            }))
+        };
+
+        console.log(postData);
+        
+        // Перед отправкой/очисткой или уходом со страницы очищаем память от Blob URL
+        // objectUrls.forEach(url => URL.revokeObjectURL(url));
+    });
+});

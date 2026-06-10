@@ -1,0 +1,198 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font: 400 15px/18px 'Golos UI Regular', sans-serif;
+    letter-spacing: -0.15px;
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.menu {
+    padding: 16px;
+    background-color: #fff;
+    position: fixed;
+    height: 100%;
+    border-right: 1px solid #2222220D;
+    top: 0px;
+    margin-top: 40px;
+    width: 72px;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.menu__image-service {
+    width: 24px;
+    height: 24px;
+    display: block;
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.menu__image-service_target {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 73px 20px;
+    box-sizing: border-box;
+}
+
+.create-post {
+    width: 474px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.create-post__preview-zone {
+    width: 100%;
+    height: 474px;
+    background-color: #F2F3F5;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.preview-zone__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+}
+
+.placeholder__icon {
+    width: 64px;
+    height: 64px;
+}
+
+.placeholder__button {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 14px 16px;
+    font: 500 16px 'Golos UI Medium', sans-serif;
+    border-radius: 10px;
+    cursor: pointer;
+    letter-spacing: 0px;
+}
+
+.preview-zone__image {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+    display: none;
+}
+
+.preview-zone__slider-right, .preview-zone__slider-left {
+    width: 20px;
+    height: 20px;
+    border: none;
+    top: 50%;
+    border-radius: 999px;
+    position: absolute; 
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    background: rgba(255, 255, 255, 0.1);
+    display: none;
+    transform: translateY(-50%);
+    z-index: 15;
+    transition: background-color 0.2s;
+}
+
+.preview-zone__slider-right:hover, .preview-zone__slider-left:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.preview-zone__slider-left {
+    left: 16px;
+}
+
+.preview-zone__slider-right {
+    right: 16px;
+}
+
+.slider__image {
+    width: 10px;
+    height: 10px;
+}
+
+.preview-zone__image-counter {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: none;
+    z-index: 15;
+    font: 400 15px/18px 'golos ui regular', sans-serif;
+    letter-spacing: -0.15px;
+}
+
+.create-post__add-button {
+    background: none;
+    border: none;
+    color: #3F8AE0;
+    font: 400 15px/18px 'Golos UI Medium', sans-serif;
+    padding: 0;
+    margin-top: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: -0.15px;
+}
+
+.add-button__icon {
+    width: 16px;
+    height: 16px;
+}
+
+.create-post__add-button:hover {
+    text-decoration: underline;
+}
+
+.create-post__textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font: 400 16px/18px 'Golos UI Regular', sans-serif;
+    margin-top: 16px;
+    letter-spacing: -0.15px;
+    padding: 0;
+}
+
+.create-post__submit-button {
+    width: 140px;
+    height: 48px;
+    border: none;
+    border-radius: 10px;
+    font: 400 16px 'Golos UI Medium', sans-serif;
+    letter-spacing: 0px;
+    margin-top: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background-color: #222;
+    color: #fff;
+}
+
+.create-post__submit-button:disabled {
+    background: #B4B4B4;
+    color: #FFFFFF;
+    cursor: not-allowed;
+}

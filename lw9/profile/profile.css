@@ -1,0 +1,135 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #fff; 
+    font: 400 15px/18px 'Golos UI Regular', sans-serif;
+    letter-spacing: -0.15px;
+}
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+}
+
+.page__sidebar {
+    width: 72px;
+    position: relative;
+}
+
+.sidebar__menu {
+    padding: 16px;
+    background-color: #fff;
+    position: fixed; 
+    height: 100%;
+    border-right: 1px solid #2222220D;
+    top: 0px;
+    margin-top: 40px;
+    width: 72px;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.menu__image-service {
+    width: 24px;
+    height: 24px;
+    display: block;
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.menu__image-service_target {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.page__main-content {
+    display: grid;
+    justify-content: center; 
+    padding: 73px 0px;
+    box-sizing: border-box;
+}
+
+.main-content__profile {
+    display: grid;
+    align-content: start; 
+    width: 100%;
+}
+
+.profile__info {
+    display: grid;
+    grid-template-rows: 143px 32px; 
+    align-items: center; 
+}
+
+.info__image-avatar {
+    width: 123px;
+    height: 123px;
+    border-radius: 16px;
+    margin: auto;
+}
+
+.info__text-name {
+    text-align: center;
+    letter-spacing: -0.25px;
+    font: 500 32px/32px 'Golos UI Medium', sans-serif;
+    margin: 0px;
+}
+
+.profile__about {
+    width: 361px;
+    margin: auto;
+    text-align: center;
+}
+
+.about__text {
+    margin: 10px 0px 12px 0px;
+}
+
+.info__image-post {
+    width: 18px; 
+    height: 18px;
+}
+
+.profile__statistic {
+    width: 101px;
+    margin: auto;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #F2F3F5;
+    margin-bottom: 42px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.statistic__text {
+    margin: 0px;
+}
+
+.profile__content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    width: 100%;
+    max-width: 966px; 
+    gap: 3px;   
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.content__post-item {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    overflow: hidden;
+}
+
+.content__image-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
